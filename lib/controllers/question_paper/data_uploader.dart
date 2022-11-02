@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:study_app/firebase_ref/loading_status.dart';
 import 'package:study_app/firebase_ref/references.dart';
 import 'dart:convert';
 
@@ -14,7 +15,11 @@ class DataUploader extends GetxController {
     super.onReady();
   }
 
+  final loadingStatus = LoadingStatus.loading.obs;
+
   Future<void> uploadData() async {
+    loadingStatus.value = LoadingStatus.loading;
+
     final firestore = FirebaseFirestore.instance;
 
     final manifestContent = await DefaultAssetBundle.of(Get.context!)
@@ -59,5 +64,7 @@ class DataUploader extends GetxController {
       }
     }
     await batch.commit();
+
+    loadingStatus.value = LoadingStatus.completed;
   }
 }
