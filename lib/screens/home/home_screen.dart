@@ -15,6 +15,8 @@ import 'package:study_app/widgets/content_area.dart';
 class HomeScreen extends GetView<MyZoomDrawerController> {
   const HomeScreen({Key? key}) : super(key: key);
 
+  static const String routeName = "/home";
+
   @override
   Widget build(BuildContext context) {
     QuestionPaperController _questionPaperController = Get.find();
