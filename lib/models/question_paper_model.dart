@@ -41,12 +41,12 @@ class QuestionPaperModel {
   String timeInMinutes() => '${(timeSeconds / 60).ceil()} mins';
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['image_url'] = this.imageUrl;
-    data['Description'] = this.description;
-    data['time_seconds'] = this.timeSeconds;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['image_url'] = imageUrl;
+    data['Description'] = description;
+    data['time_seconds'] = timeSeconds;
 
     return data;
   }
@@ -57,6 +57,7 @@ class Questions {
   String question;
   List<Answers> answers;
   String? correctAnswer;
+  String? selectedAnswer;
 
   Questions(
       {required this.id,
@@ -71,14 +72,18 @@ class Questions {
             (json['answers'] as List).map((e) => Answers.fromJson(e)).toList(),
         correctAnswer = json['correct_answer'];
 
+  Questions.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> json)
+      : id = json.id,
+        question = json['question'],
+        answers = [],
+        correctAnswer = json['correct_answer'];
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['question'] = this.question;
-    if (this.answers != null) {
-      data['answers'] = this.answers.map((v) => v.toJson()).toList();
-    }
-    data['correct_answer'] = this.correctAnswer;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['question'] = question;
+    data['answers'] = answers.map((v) => v.toJson()).toList();
+    data['correct_answer'] = correctAnswer;
     return data;
   }
 }
@@ -91,12 +96,16 @@ class Answers {
 
   Answers.fromJson(Map<String, dynamic> json)
       : identifier = json['identifier'],
-        answer = json['Answer'];
+        answer = json['answer'];
+
+  Answers.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> json)
+      : identifier = json['identifier'] as String?,
+        answer = json['answer'] as String?;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['identifier'] = identifier;
-    data['Answer'] = answer;
+    data['answer'] = answer;
     return data;
   }
 }

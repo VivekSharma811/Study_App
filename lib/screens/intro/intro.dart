@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class AppIntroductionScreen extends StatelessWidget {
   const AppIntroductionScreen({Key? key}) : super(key: key);
 
+  static const String routeName = "/intro";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
