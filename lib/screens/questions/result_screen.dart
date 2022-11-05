@@ -72,6 +72,8 @@ class ResultScreen extends GetView<QuestionsController> {
                           final _correctAnswer = _question.correctAnswer;
                           if (_selectedAnswer == _correctAnswer) {
                             _status = AnswerStatus.correct;
+                          } else if (_selectedAnswer == null) {
+                            _status = AnswerStatus.notAnswered;
                           } else {
                             _status = AnswerStatus.wrong;
                           }
