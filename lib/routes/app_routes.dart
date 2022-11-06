@@ -4,6 +4,7 @@ import 'package:study_app/controllers/question_paper/question_paper_controller.d
 import 'package:study_app/controllers/questions_controller.dart';
 import 'package:study_app/screens/home/home_screen.dart';
 import 'package:study_app/screens/login/login_screen.dart';
+import 'package:study_app/screens/questions/answer_check_screen.dart';
 import 'package:study_app/screens/questions/questions_screen.dart';
 import 'package:study_app/screens/questions/result_screen.dart';
 import 'package:study_app/screens/questions/test_overview_screen.dart';
@@ -35,5 +36,8 @@ class AppRoutes {
             name: TestOverviewScreen.routeName,
             page: () => const TestOverviewScreen()),
         GetPage(name: ResultScreen.routeName, page: () => const ResultScreen()),
+        GetPage(
+            name: AnswerCheckScreen.routeName,
+            page: () => const AnswerCheckScreen()),
       ];
 }
